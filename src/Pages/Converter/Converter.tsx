@@ -4,6 +4,7 @@ import { IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
 import { CurrencyList, Header } from "../../components";
+import RefreshButton from "../../components/UI/RefreshButton";
 
 import useGetCurrencyList from "../../hooks/useGetCurrencyList";
 import useGetConverterData from "../../hooks/useGetConverterData";
@@ -14,7 +15,7 @@ import { activeCurrencyListData } from "../../types";
 import styles from "./Converter.module.css";
 
 const Converter: React.FC = () => {
-  const currencyList = useGetCurrencyList();
+  const [currencyList, forceUpdate] = useGetCurrencyList();
   const [from, setFrom] =
     React.useState<keyof activeCurrencyListData>(DEFALUT_CURRENCY);
   const [to, setTo] = React.useState<keyof activeCurrencyListData>(
@@ -65,6 +66,7 @@ const Converter: React.FC = () => {
             currencyList={currencyList}
             setCurrent={setTo}
           />
+          <RefreshButton forceUpdate={forceUpdate} />
         </>
       )}
     </>

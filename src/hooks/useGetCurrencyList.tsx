@@ -7,6 +7,12 @@ const useGetCurrencyList = () => {
     null
   );
 
+  const [value, setValue] = React.useState<number>(0);
+
+  const forceUpdate = () => {
+    setValue((v) => v + 1);
+  };
+
   React.useEffect(() => {
     const getCurrencies = async () => {
       const data = await (
@@ -14,11 +20,12 @@ const useGetCurrencyList = () => {
       ).json();
       setCurrencyList(data);
     };
-
     getCurrencies();
-  }, []);
+    const interval = setInterval(getCurrencies, 60000);
+    return () => clearInterval(interval);
+  }, [value]);
 
-  return currencyList;
+  return [currencyList, forceUpdate] as const;
 };
 
 export default useGetCurrencyList;

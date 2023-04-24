@@ -1,6 +1,7 @@
 import React from "react";
 
 import { ActiveCurrencyList, CurrencyList, Header } from "../../components";
+import RefreshButton from "../../components/UI/RefreshButton";
 
 import useGetCurrencyList from "../../hooks/useGetCurrencyList";
 import useGetConverterData from "../../hooks/useGetConverterData";
@@ -12,7 +13,7 @@ import {
 import { activeCurrencyListData } from "../../types";
 
 const Main: React.FC = () => {
-  const currencyList = useGetCurrencyList();
+  const [currencyList, forceUpdate] = useGetCurrencyList();
   const [currentCurrency, setCurrentCurrency] =
     React.useState<string>(DEFALUT_CURRENCY);
   const [activeCurrencyList, setActiveCurrencyList] = React.useState<string[]>(
@@ -65,6 +66,7 @@ const Main: React.FC = () => {
             currencyList={currencyList}
             setCurrent={setActiveCurrencyListHandler}
           />
+          <RefreshButton forceUpdate={forceUpdate} />
         </>
       )}
     </>
