@@ -49,6 +49,7 @@ const Converter: React.FC = () => {
           />
           <div className={styles.container}>
             <TextField
+              type="number"
               defaultValue={value}
               onChange={(event) => setValue(Number(event.target.value))}
             />
