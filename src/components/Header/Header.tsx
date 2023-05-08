@@ -7,11 +7,11 @@ import styles from "./Header.module.css";
 const Header: React.FC = () => {
   return (
     <header className={styles.container}>
-      <Link to={"/"}>
+      <Link data-testid="link" to={"/"}>
         <Button variant="outlined">Main</Button>
       </Link>
-      <Link to={"/converter"}>
-        <Button variant="outlined">Converter </Button>
+      <Link data-testid="link" to={"/converter"}>
+        <Button variant="outlined">Converter</Button>
       </Link>
     </header>
   );

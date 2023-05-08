@@ -3,12 +3,12 @@ import SwapVertIcon from "@mui/icons-material/SwapVert";
 import { IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
-import { CurrencyList, Header } from "../../components";
+import { CurrencyList } from "../../components";
 import RefreshButton from "../../components/UI/RefreshButton";
 
 import useGetCurrencyList from "../../hooks/useGetCurrencyList";
 import useGetConverterData from "../../hooks/useGetConverterData";
-import { getString } from "../../utils/getString";
+import { setString } from "../../utils/setString";
 import { DEFALUT_CURRENCY, DEFALUT_CURRENCY_TO_CONVERT } from "../../constants";
 import { activeCurrencyListData } from "../../types";
 
@@ -25,7 +25,7 @@ const Converter: React.FC = () => {
   const secondCurrencyData = useGetConverterData<
     activeCurrencyListData,
     keyof activeCurrencyListData
-  >(from, to, getString);
+  >(from, to, setString);
 
   const swap = () => {
     setFrom(to);
@@ -36,12 +36,11 @@ const Converter: React.FC = () => {
     secondCurrencyData && Number((value * secondCurrencyData[to]).toFixed(2));
 
   return (
-    <>
+    <main data-testid="converter-page">
       {currencyList === null || convertedValue === null ? (
         <div>Loading...</div>
       ) : (
         <>
-          <Header />
           <CurrencyList
             currentCurrency={from}
             currencyList={currencyList}
@@ -70,7 +69,7 @@ const Converter: React.FC = () => {
           <RefreshButton forceUpdate={forceUpdate} />
         </>
       )}
-    </>
+    </main>
   );
 };
 

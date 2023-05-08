@@ -23,12 +23,13 @@ const ActiveCurrencyList: React.FC<ActiveCurrencyListProps> = ({
       ) : (
         <>
           {activeCurrencyData?.map((obj, n) => (
-            <div className={styles.item} key={n}>
+            <div className={styles.item} key={n} data-testid="active-currency">
               <span className={styles.name}>
                 {fullNameCurrensyArr[n]}, {activeCurrencyList[n]}:{" "}
               </span>
               <span>{Number(currencyValueArr![n]).toFixed(2)}</span>
               <IconButton
+                data-testid="icon-button"
                 color="primary"
                 component="label"
                 onClick={() => deleteItem(activeCurrencyList[n])}

@@ -1,11 +1,11 @@
 import React from "react";
 
-import { ActiveCurrencyList, CurrencyList, Header } from "../../components";
+import { ActiveCurrencyList, CurrencyList } from "../../components";
 import RefreshButton from "../../components/UI/RefreshButton";
 
 import useGetCurrencyList from "../../hooks/useGetCurrencyList";
 import useGetConverterData from "../../hooks/useGetConverterData";
-import { getArray } from "../../utils/getArray";
+import { setArray } from "../../utils/setArray";
 import {
   DEFALUT_ACTIVE_CURRENCY_LIST,
   DEFALUT_CURRENCY,
@@ -23,7 +23,7 @@ const Main: React.FC = () => {
   const activeCurrencyData = useGetConverterData<
     activeCurrencyListData[],
     string[]
-  >(currentCurrency, activeCurrencyList, getArray);
+  >(currentCurrency, activeCurrencyList, setArray);
 
   const setCurrentCurrencyHandler = (curr: string) => {
     setCurrentCurrency(curr);
@@ -43,12 +43,11 @@ const Main: React.FC = () => {
   };
 
   return (
-    <>
+    <main data-testid="main-page">
       {currencyList === null || activeCurrencyData === null ? (
         <div>Loading...</div>
       ) : (
         <>
-          <Header />
           <CurrencyList
             currentCurrency={currentCurrency}
             currencyList={currencyList}
@@ -57,8 +56,8 @@ const Main: React.FC = () => {
 
           <ActiveCurrencyList
             activeCurrencyData={activeCurrencyData}
-            deleteItem={deleteItem}
             activeCurrencyList={activeCurrencyList}
+            deleteItem={deleteItem}
             currencyList={currencyList}
           />
           <CurrencyList
@@ -69,7 +68,7 @@ const Main: React.FC = () => {
           <RefreshButton forceUpdate={forceUpdate} />
         </>
       )}
-    </>
+    </main>
   );
 };
 

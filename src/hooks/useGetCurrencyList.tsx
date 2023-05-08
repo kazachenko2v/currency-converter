@@ -1,6 +1,9 @@
 import React from "react";
+
+import { GET_CURRENCY_LATEST_DATE_FORMAT_JSON } from "../constants/api";
+import { getData } from "../utils/getData";
+
 import { currencyList } from "../types";
-import { FORMAT_JSON, GET_CURRENCY_LATEST_DATE } from "../constants/api";
 
 const useGetCurrencyList = () => {
   const [currencyList, setCurrencyList] = React.useState<currencyList | null>(
@@ -15,9 +18,7 @@ const useGetCurrencyList = () => {
 
   React.useEffect(() => {
     const getCurrencies = async () => {
-      const data = await (
-        await fetch(`${GET_CURRENCY_LATEST_DATE}/currencies${FORMAT_JSON}`)
-      ).json();
+      const data = await getData(GET_CURRENCY_LATEST_DATE_FORMAT_JSON);
       setCurrencyList(data);
     };
     getCurrencies();

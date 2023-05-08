@@ -1,5 +1,5 @@
 .container {
   display: flex;
   justify-content: space-evenly;
-  padding-bottom: 40px;
+  padding: 2rem 0;
 }
